@@ -61,12 +61,12 @@ A **full-stack e-commerce website** built for Kashvi Creations, a local store ba
    - **Client:**
      ```bash
      cd client
-     npm start
+     npm run dev
      ```
    - **Server:**
      ```bash
      cd server
-     npm start
+     npm run dev
      ```
 
 ---
