@@ -4,17 +4,26 @@ A **full-stack e-commerce website** built for Kashvi Creations, a local store ba
 
 ---
 
-## 🚨 IMPORTANT: Vercel Deployment Setup Required!
+## 🚨 ⚠️ ACTION REQUIRED: Vercel Not Working? ⚠️ 🚨
 
-**If you're seeing `localhost:5000` errors on Vercel**, you need to set the environment variable!
+### Seeing errors like `localhost:5000/api/...` or `404` on Vercel?
 
-### Quick Fix (5 minutes):
-1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
-2. Select your project → Settings → Environment Variables
-3. Add: `VITE_BACKEND_URL` = `https://kashvi-creation-1.onrender.com`
-4. Click Deployments → Redeploy
+**The environment variable is NOT set on Vercel!** The code is ready, but you must configure Vercel.
 
-**👉 See [URGENT_FIX.md](./URGENT_FIX.md) for detailed step-by-step instructions with screenshots.**
+### ⚡ Quick Fix (5 minutes):
+
+1. **[Open Vercel Dashboard](https://vercel.com/dashboard)**
+2. **Settings → Environment Variables**
+3. **Add:** `VITE_BACKEND_URL` = `https://kashvi-creation-1.onrender.com`
+4. **Deployments → Redeploy** (CRITICAL - must redeploy!)
+
+### 📚 Detailed Guides:
+- **[ACTION_REQUIRED.md](./ACTION_REQUIRED.md)** ⭐ START HERE - Complete checklist
+- **[URGENT_FIX.md](./URGENT_FIX.md)** - Step-by-step with screenshots
+- **[READ_THIS_FIRST.md](./READ_THIS_FIRST.md)** - Why this is happening
+- **[VERCEL_SETUP.md](./VERCEL_SETUP.md)** - Detailed troubleshooting
+
+**Without this configuration, your Vercel deployment WILL NOT WORK!**
 
 ---
 
