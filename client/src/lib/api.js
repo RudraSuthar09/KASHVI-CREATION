@@ -16,9 +16,14 @@ export const apiClient = axios.create({
 
 // Helper function to build full URL for fetch requests
 export const buildApiUrl = (path) => {
-  // If path starts with /, remove the leading slash when baseURL is not empty
-  const cleanPath = path.startsWith("/") && apiBaseUrl ? path.slice(1) : path;
-  return apiBaseUrl ? `${apiBaseUrl}/${cleanPath}` : path;
+  // If no baseURL, return path as-is (uses proxy in dev)
+  if (!apiBaseUrl) return path;
+  
+  // Remove trailing slash from baseURL and leading slash from path
+  const cleanBaseUrl = apiBaseUrl.replace(/\/$/, '');
+  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+  
+  return `${cleanBaseUrl}/${cleanPath}`;
 };
 
 export default apiClient;
