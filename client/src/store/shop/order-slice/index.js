@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import apiClient from "@/lib/api";
 
 const initialState = {
   orderId: null,
@@ -11,8 +11,8 @@ const initialState = {
 export const createNewOrder = createAsyncThunk(
   "/order/createNewOrder",
   async (orderData) => {
-    const response = await axios.post(
-      "http://localhost:5000/api/shop/order/create",
+    const response = await apiClient.post(
+      "/api/shop/order/create",
       orderData
     );
     return response.data;
@@ -22,8 +22,8 @@ export const createNewOrder = createAsyncThunk(
 export const getAllOrdersByUserId = createAsyncThunk(
   "/order/getAllOrdersByUserId",
   async (userId) => {
-    const response = await axios.get(
-      `http://localhost:5000/api/shop/order/list/${userId}`
+    const response = await apiClient.get(
+      `/api/shop/order/list/${userId}`
     );
     return response.data;
   }
@@ -32,8 +32,8 @@ export const getAllOrdersByUserId = createAsyncThunk(
 export const getOrderDetails = createAsyncThunk(
   "/order/getOrderDetails",
   async (id) => {
-    const response = await axios.get(
-      `http://localhost:5000/api/shop/order/details/${id}`
+    const response = await apiClient.get(
+      `/api/shop/order/details/${id}`
     );
     return response.data;
   }

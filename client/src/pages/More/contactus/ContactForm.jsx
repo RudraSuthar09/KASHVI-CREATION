@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { X } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
+import { buildApiUrl } from "@/lib/api"
 import Footer from '../../../components/common/Footer';
 import Head from "../../../components/shopping-view/header";
 import WhatsAppButton from "@/components/common/WhatsAppButton";
@@ -28,12 +29,13 @@ const ContactForm = ({ onClose }) => {
     e.preventDefault();
     try {
       console.log(formData);
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch(buildApiUrl("/api/contact"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+        credentials: "include",
       });
   
       // ✅ Parse JSON response

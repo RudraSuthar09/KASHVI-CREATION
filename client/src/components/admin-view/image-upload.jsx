@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
+import apiClient from "@/lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function ProductImageUpload({
@@ -73,7 +73,7 @@ function ProductImageUpload({
     try {
       console.log("Uploading to backend:", [...formData.entries()]);
   
-      const response = await axios.post("http://localhost:5000/api/admin/products/upload-media", formData, {
+      const response = await apiClient.post("/api/admin/products/upload-media", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
   

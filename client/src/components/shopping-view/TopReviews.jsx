@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
+import apiClient from "@/lib/api";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const TopReviews = () => {
@@ -10,7 +10,7 @@ const TopReviews = () => {
   useEffect(() => {
     const fetchTopReviews = async () => {
       try {
-        const response = await axios.get("/api/shop/review/top-reviews");
+        const response = await apiClient.get("/api/shop/review/top-reviews");
         setReviews(response.data.data);
       } catch (error) {
         console.error("Error fetching top reviews:", error);
