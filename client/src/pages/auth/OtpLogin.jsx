@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import apiClient from "@/lib/api";
 
 const OtpLogin = () => {
   const [phone, setPhone] = useState("");
@@ -10,7 +10,7 @@ const OtpLogin = () => {
   // 🔹 Send OTP Request
   const sendOtp = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/send-otp", { phone });
+      const response = await apiClient.post("/api/auth/send-otp", { phone });
       if (response.data.success) {
         setStep(2);
         setMessage("OTP sent successfully!");
@@ -25,7 +25,7 @@ const OtpLogin = () => {
   // 🔹 Verify OTP Request
   const verifyOtp = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/verify-otp", { phone, enteredOtp: otp });
+      const response = await apiClient.post("/api/auth/verify-otp", { phone, enteredOtp: otp });
       if (response.data.success) {
         setMessage("✅ Login Successful!");
         // Redirect or store authentication token (JWT or session)

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import axios from "axios";
+import apiClient from "@/lib/api";
 import zxcvbn from "zxcvbn"; // ✅ Import zxcvbn
 
 function ResetPassword() {
@@ -32,7 +32,7 @@ function ResetPassword() {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/reset-password", {
+      const response = await apiClient.post("/api/auth/reset-password", {
         token,
         newPassword,
       });

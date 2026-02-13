@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Input } from "../ui/input";
 import logo from "../../assets/logo.jpg";
-import axios from "axios";
+import apiClient from "@/lib/api";
 
 
 function MenuItems({ isColumn = false }) {
@@ -104,7 +104,7 @@ function HeaderRightContent() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/logout", {}, { withCredentials: true });
+      await apiClient.post("/api/auth/logout", {}, { withCredentials: true });
       localStorage.removeItem("token");
       window.location.href = "/shop/home";
     } catch (error) {
