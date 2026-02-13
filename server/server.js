@@ -45,7 +45,12 @@ mongoose
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://kashvi-creation.vercel.app", // Will update this later
+      "https://kashvi-creation-rudrasuthar09.vercel.app" // Alternate URL
+    ],
     credentials: true,
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
