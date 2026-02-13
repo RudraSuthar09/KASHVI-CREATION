@@ -104,7 +104,7 @@ function HeaderRightContent() {
 
   const handleLogout = async () => {
     try {
-      await apiClient.post("/api/auth/logout", {}, { withCredentials: true });
+      await apiClient.post("/api/auth/logout");
       localStorage.removeItem("token");
       window.location.href = "/shop/home";
     } catch (error) {
