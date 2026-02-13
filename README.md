@@ -96,6 +96,19 @@ A **full-stack e-commerce website** built for Kashvi Creations, a local store ba
 
 ---
 
+## 🔒 Security Best Practices
+
+**Important:** The repository currently has `.env` files committed to git. While these are being used for the current deployment, this is not a recommended security practice.
+
+**Recommendations:**
+1. **For new secrets**: Use environment variables in your deployment platform (Vercel, Render) instead of committing them
+2. **Rotate existing secrets**: If possible, generate new API keys and secrets, configure them in your deployment platform, and remove the old ones from git history
+3. **Use .env.example**: The `.env.example` file shows what variables are needed without exposing actual values
+
+**Note:** This PR adds `.env` to `.gitignore` to prevent future commits of environment files, but existing files remain to avoid breaking current deployments.
+
+---
+
 ## 🚀 Deployment
 
 ### Deploying to Vercel (Client) and Render (Server)
