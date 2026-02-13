@@ -107,20 +107,34 @@ app.post("/api/auth/verify-otp", async (req, res) => {
 });
 
 // ✅ Password Reset Route
-app.post("/api/auth/reset-password", async (req, res) => {
+// ✅ Password Reset Route (OTP-based) - FIXED
+app.post("/api/auth/reset-password-otp", async (req, res) => {
   const { phone, newPassword } = req.body;
 
-  // Find user by phone
-  const user = await User.findOne({ phone });
+  try {
+    // Find user by phone
+    const user = await User.findOne({ phone });
 
-  if (!user) return res.json({ success: false, message: "User not found!" });
+    if (!user) {
+      return res.json({ success: false, message: "User not found!" });
+    }
 
-  // Hash password before saving
-  const hashedPassword = await bcrypt.hash(newPassword, 10);
-  user.password = hashedPassword;
-  await user.save();
+    // Hash password before saving
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    
+    // ✅ FIX: Use updateOne instead of save
+    await User.updateOne(
+      { _id: user._id },
+      { $set: { password: hashedPassword } }
+    );
 
-  res.json({ success: true, message: "Password reset successful!" });
+    console.log("✅ OTP Password reset successful for user:", user.phone);
+
+    res.json({ success: true, message: "Password reset successful!" });
+  } catch (error) {
+    console.error("❌ Error in OTP password reset:", error);
+    res.status(500).json({ success: false, message: "Error resetting password" });
+  }
 });
 
 // ✅ Add Existing Routes

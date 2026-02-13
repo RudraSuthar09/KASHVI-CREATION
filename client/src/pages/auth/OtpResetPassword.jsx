@@ -30,7 +30,7 @@ const OtpResetPassword = () => {
 
       if (response.data.success) {
         // Now, reset the password
-        await axios.post("http://localhost:5000/api/auth/reset-password", { phone, newPassword });
+        await axios.post("http://localhost:5000/api/auth/reset-password-otp", { phone, newPassword });
         setMessage("✅ Password Reset Successful!");
       } else {
         setMessage("❌ Invalid OTP, try again.");

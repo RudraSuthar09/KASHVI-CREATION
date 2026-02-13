@@ -47,10 +47,10 @@ const categoriesWithImage = [
 ];
 
 const brandsWithIcon = [
-  { id: "wedding_sarees", label: "Wedding Sarees",imageUrl:"https://res.cloudinary.com/doytxxdrl/image/upload/v1739591502/wedding_e1f0hl.webp" },
-  { id: "party_wear_sarees", label: "Party Wear Sarees" ,imageUrl:"https://res.cloudinary.com/doytxxdrl/image/upload/v1739591501/party_wear_sarees_ucifec.webp" },
-  { id: "casual_sarees", label: "Casual Sarees" ,imageUrl:"https://res.cloudinary.com/doytxxdrl/image/upload/v1739591504/casual_jegizu.webp" },
-  { id: "festive_sarees", label: "Festive Sarees" ,imageUrl:"https://res.cloudinary.com/doytxxdrl/image/upload/v1739591500/festive_hnjui9.webp" },
+  { id: "wedding_sarees", label: "Wedding Sarees", imageUrl: "https://res.cloudinary.com/doytxxdrl/image/upload/v1739591502/wedding_e1f0hl.webp" },
+  { id: "party_wear_sarees", label: "Party Wear Sarees", imageUrl: "https://res.cloudinary.com/doytxxdrl/image/upload/v1739591501/party_wear_sarees_ucifec.webp" },
+  { id: "casual_sarees", label: "Casual Sarees", imageUrl: "https://res.cloudinary.com/doytxxdrl/image/upload/v1739591504/casual_jegizu.webp" },
+  { id: "festive_sarees", label: "Festive Sarees", imageUrl: "https://res.cloudinary.com/doytxxdrl/image/upload/v1739591500/festive_hnjui9.webp" },
 ]
 
 
@@ -75,35 +75,35 @@ function AboutUsSection() {
         Exclusive Designer Sarees
       </h3>
       <p className="text-lg text-gray-800 font-medium leading-relaxed max-w-3xl mx-auto">
-        With each stitch, Kashvi Creation combines love and trust to craft sarees that not only celebrate India’s heritage but also inspire modern elegance. 
+        With each stitch, Kashvi Creation combines love and trust to craft sarees that not only celebrate India’s heritage but also inspire modern elegance.
       </p>
     </div>
   );
 }
 
-function VideoBackground(){
-    return (
-      <div className="relative w-full h-screen overflow-hidden">
-        {/* Background Video */}
-        <video
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          src="https://res.cloudinary.com/doytxxdrl/video/upload/v1739589193/final_fashion_visuals_i0czzy.mp4" // Replace with your video URL
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-        
-        {/* Overlay for better contrast */}
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50" />
-  
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
-          <h1 className="text-5xl font-bold mb-2">FASHION VISUALS</h1>
-          <h3 className="text-2xl font-semibold mb-4">KASHVI CREATION</h3>
-        </div>
+function VideoBackground() {
+  return (
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* Background Video */}
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        src="https://res.cloudinary.com/doytxxdrl/video/upload/v1739589193/final_fashion_visuals_i0czzy.mp4" // Replace with your video URL
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+
+      {/* Overlay for better contrast */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50" />
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
+        <h1 className="text-5xl font-bold mb-2">FASHION VISUALS</h1>
+        <h3 className="text-2xl font-semibold mb-4">KASHVI CREATION</h3>
       </div>
-    );
+    </div>
+  );
 }
 
 function TrustSection() {
@@ -179,7 +179,7 @@ function ShoppingHome() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
-//navigation
+  //navigation
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters")
     const currentFilter = {
@@ -200,7 +200,7 @@ function ShoppingHome() {
       });
       return;
     }
-  
+
     dispatch(
       addToCart({
         userId: user._id,
@@ -251,18 +251,19 @@ function ShoppingHome() {
   //   }, [featureImageList.length]);
 
 
+
   return (
     <div className="flex flex-col min-h-screen">
       <div className="relative w-full h-[500px] bg-[#f8f4f0] overflow-hidden">
+
         {/* Image Slider  */}
         {featureImageList && featureImageList.length > 0 ? (
           featureImageList.map((slide, index) => (
             <img
               key={index}
               src={slide?.image}
-              className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-              h-auto max-w-full object-cover scale-105
-                  ${index === currentSlide ? "block" : "hidden"}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500
+  ${index === currentSlide ? "opacity-100" : "opacity-0"}`}
               alt={`Saree ${index + 1}`}
             />
           ))
@@ -279,7 +280,7 @@ function ShoppingHome() {
           onClick={() =>
             setCurrentSlide((prevSlide) => (prevSlide - 1 + featureImageList.length) % featureImageList.length)
           }
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 text-gray-800"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 text-gray-800 z-20"
         >
           <ChevronLeftIcon className="w-5 h-5" />
         </Button>
@@ -287,7 +288,7 @@ function ShoppingHome() {
           variant="outline"
           size="icon"
           onClick={() => setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImageList.length)}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 text-gray-800"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 text-gray-800 z-20"
         >
           <ChevronRightIcon className="w-5 h-5" />
         </Button>
@@ -384,7 +385,7 @@ function ShoppingHome() {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.2}}
+            transition={{ duration: 0.2 }}
             className="flex flex-col justify-center lg:col-span-1 max-w-md "
           >
             {/* Large Screen Heading */}
@@ -402,15 +403,15 @@ function ShoppingHome() {
             </p>
 
             <button
-            onClick={() => {
-              // Scroll to the top of the page
+              onClick={() => {
+                // Scroll to the top of the page
 
-              window.scrollTo({ top: 0, behavior: "smooth" });
+                window.scrollTo({ top: 0, behavior: "smooth" });
 
-              // Navigate to the listing page
-              navigate("/shop/listing");
-            }}
-            className="hidden mt-6 bg-[#0a373b] hover:bg-[#085b60]
+                // Navigate to the listing page
+                navigate("/shop/listing");
+              }}
+              className="hidden mt-6 bg-[#0a373b] hover:bg-[#085b60]
  text-white rounded-md text-lg font-semibold  transition w-auto lg:block lg:px-6 lg:py-3 max-w-xs mx-auto">
               SHOP NOW
             </button>
@@ -426,7 +427,7 @@ function ShoppingHome() {
             <Swiper
               slidesPerView={1.2}
               spaceBetween={16}
-              navigation={{             
+              navigation={{
                 prevEl: '.swiper-button-prev',
                 nextEl: '.swiper-button-next',
               }}
@@ -491,7 +492,7 @@ function ShoppingHome() {
   className="w-full h-full object-cover"
 /> */}
 
-      <ExtraAdd/>
+      <ExtraAdd />
 
       {/* CategorywithVideo Color */}
       <motion.section
@@ -569,52 +570,52 @@ function ShoppingHome() {
 
 
       <motion.section
-  initial={{ opacity: 0, y: 50 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5, delay: 0.2 }}
-  className="py-12 bg-white"
->
-  <div className="container mx-auto px-4 my-6 mb-10">
-    <h2 className="text-3xl text-[#0a373b] font-bold text-center mb-8">SHOP BY OCCASIONS</h2>
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-      {brandsWithIcon.map((brandItem, index) => (
-        <motion.div
-          key={brandItem.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1 }}
-          className="relative group cursor-pointer"
-          onClick={() => {
-            // Scroll to the top of the page
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            handleNavigateToListingPage(brandItem, 'Occasion')
-          
-          }}
-        >
-          {/* Image */}
-          <div className="w-full h-[400px] overflow-hidden rounded-lg">
-            <img
-              src={brandItem.imageUrl} // Replace with correct image URL
-              alt={brandItem.label}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="py-12 bg-white"
+      >
+        <div className="container mx-auto px-4 my-6 mb-10">
+          <h2 className="text-3xl text-[#0a373b] font-bold text-center mb-8">SHOP BY OCCASIONS</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {brandsWithIcon.map((brandItem, index) => (
+              <motion.div
+                key={brandItem.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="relative group cursor-pointer"
+                onClick={() => {
+                  // Scroll to the top of the page
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  handleNavigateToListingPage(brandItem, 'Occasion')
+
+                }}
+              >
+                {/* Image */}
+                <div className="w-full h-[400px] overflow-hidden rounded-lg">
+                  <img
+                    src={brandItem.imageUrl} // Replace with correct image URL
+                    alt={brandItem.label}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Label */}
+                <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-black text-white px-3 py-2 text-sm rounded-sm opacity-90">
+                  {brandItem.label}
+                </div>
+              </motion.div>
+            ))}
           </div>
-
-          {/* Label */}
-          <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-black text-white px-3 py-2 text-sm rounded-sm opacity-90">
-            {brandItem.label}
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</motion.section>
+        </div>
+      </motion.section>
 
 
-<VideoBackground/>
-      <TopReviews/>
+      <VideoBackground />
+      <TopReviews />
       <TrustSection />
-      <Chatbot/>
+      <Chatbot />
       <WhatsAppButton />
       <Footer />
     </div>
