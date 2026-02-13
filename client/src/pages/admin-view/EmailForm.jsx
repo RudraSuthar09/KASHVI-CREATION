@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import apiClient from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,7 +15,7 @@ const EmailForm = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/admin/send-email', {
+      const response = await apiClient.post('/api/admin/send-email', {
         subject,
         message,
       });

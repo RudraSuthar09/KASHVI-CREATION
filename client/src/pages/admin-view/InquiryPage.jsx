@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import apiClient from "@/lib/api";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,7 +12,7 @@ const InquiryPage = () => {
     const fetchInquiries = async () => {
       try {
         const token = localStorage.getItem("token"); // Admin token
-        const response = await axios.get("http://localhost:5000/api/contacts", {
+        const response = await apiClient.get("/api/contacts", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
