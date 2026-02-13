@@ -12,9 +12,11 @@ export default defineConfig({
   },
   server: {
     port: 5173, // Change if needed
-    proxy: {
+    // Only use proxy if VITE_BACKEND_URL is not set (for local development)
+    // In production (Vercel), VITE_BACKEND_URL will be set, so proxy is skipped
+    proxy: process.env.VITE_BACKEND_URL ? {} : {
       "/api": {
-        target: "http://localhost:5000", // Updated backend port
+        target: "http://localhost:5000", // Backend port
         changeOrigin: true,
         secure: false,
       },

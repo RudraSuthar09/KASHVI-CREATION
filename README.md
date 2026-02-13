@@ -54,8 +54,33 @@ A **full-stack e-commerce website** built for Kashvi Creations, a local store ba
    ```
 
 3. **Configure environment variables:**
-   - Create `.env` files in both `client` and `server` directories.
+   
+   **Client (.env):**
+   - Copy `client/.env.example` to `client/.env`
+   - For **local development**:
+     ```env
+     # Leave VITE_BACKEND_URL empty to use Vite proxy
+     VITE_BACKEND_URL=
+     REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+     VITE_API_URL=your_gemini_api_url
+     ```
+   - For **production deployment** (Vercel):
+     ```env
+     # Set to your Render backend URL
+     VITE_BACKEND_URL=https://kashvi-creation-1.onrender.com
+     REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+     VITE_API_URL=your_gemini_api_url
+     ```
+   
+   **Server (.env):**
    - Add MongoDB URI, Cloudinary credentials, Razorpay keys, and other necessary environment variables.
+   - Ensure `NODE_ENV=production` is set for production deployment
+   ```env
+   MONGO_URI=your_mongodb_uri
+   JWT_SECRET=your_jwt_secret
+   NODE_ENV=production
+   # ... other variables
+   ```
 
 4. **Run the application:**
    - **Client:**
@@ -68,6 +93,40 @@ A **full-stack e-commerce website** built for Kashvi Creations, a local store ba
      cd server
      npm run dev
      ```
+
+---
+
+## 🚀 Deployment
+
+### Deploying to Vercel (Client) and Render (Server)
+
+**Client (Vercel):**
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Configure environment variables in Vercel dashboard:
+   - `VITE_BACKEND_URL=https://kashvi-creation-1.onrender.com` (or your Render backend URL)
+   - `REACT_APP_GOOGLE_MAPS_API_KEY=your_key`
+   - `VITE_API_URL=your_gemini_url`
+4. Deploy from the `client` directory
+
+**Server (Render):**
+1. Create a new Web Service on Render
+2. Connect your GitHub repository
+3. Configure build settings:
+   - Build Command: `npm install`
+   - Start Command: `npm start` or `node server.js`
+   - Root Directory: `server`
+4. Add environment variables:
+   - `NODE_ENV=production`
+   - `MONGO_URI=your_mongodb_uri`
+   - `JWT_SECRET=your_jwt_secret`
+   - Add other required environment variables
+5. Ensure CORS origins in `server.js` include your Vercel domain(s)
+
+**Important Notes:**
+- The client uses a centralized API helper (`client/src/lib/api.js`) that automatically switches between local proxy and production backend based on `VITE_BACKEND_URL`
+- In production, cookies use `SameSite=None; Secure` for cross-origin authentication
+- CORS is configured to accept requests from Vercel domains
 
 ---
 
