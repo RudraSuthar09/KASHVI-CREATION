@@ -4,6 +4,20 @@ A **full-stack e-commerce website** built for Kashvi Creations, a local store ba
 
 ---
 
+## 🚨 IMPORTANT: Vercel Deployment Setup Required!
+
+**If you're seeing `localhost:5000` errors on Vercel**, you need to set the environment variable!
+
+### Quick Fix (5 minutes):
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Select your project → Settings → Environment Variables
+3. Add: `VITE_BACKEND_URL` = `https://kashvi-creation-1.onrender.com`
+4. Click Deployments → Redeploy
+
+**👉 See [URGENT_FIX.md](./URGENT_FIX.md) for detailed step-by-step instructions with screenshots.**
+
+---
+
 ## 🚀 Features
 
 - **Secure User Authentication**
