@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import API_BASE_URL from "@/config/api";
 
 const TopReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -10,7 +11,7 @@ const TopReviews = () => {
   useEffect(() => {
     const fetchTopReviews = async () => {
       try {
-        const response = await axios.get("/api/shop/review/top-reviews");
+        const response = await axios.get(`${API_BASE_URL}/api/shop/review/top-reviews`);
         setReviews(response.data.data);
       } catch (error) {
         console.error("Error fetching top reviews:", error);
