@@ -50,7 +50,7 @@ app.use(
       "http://localhost:5174",
       "https://kashvi-creation-e4iv.vercel.app",
       "https://kashvi-creation.vercel.app",
-      "https://kashvi-creation-rudrasuthar09.vercel.app"
+      "https://kashvi-creation-lgpe.vercel.app"
     ],
     credentials: true,
     methods: ["GET", "POST", "DELETE", "PUT"],
