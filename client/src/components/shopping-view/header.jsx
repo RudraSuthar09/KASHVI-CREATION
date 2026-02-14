@@ -4,7 +4,6 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { shoppingViewHeaderMenuItems } from "@/config";
-import API_BASE_URL from "@/config/api";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,27 +19,26 @@ import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Input } from "../ui/input";
 import logo from "../../assets/logo.jpg";
-import axios from "axios";
-
 
 function MenuItems({ isColumn = false }) {
   const navigate = useNavigate(); // ✅ Fix: Define navigate inside the component
 
   const handleNavigateToListingPage = (getSectionId, getCurrentOption) => {
     sessionStorage.removeItem("filters"); // Clear previous filters
-  
+
     const currentFilter = { [getSectionId]: [getCurrentOption] };
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
-  
+
     // Navigate with a query param to ensure reloading
-    navigate(`/shop/listing?filter=${getSectionId}-${getCurrentOption}`, { replace: true })
+    navigate(`/shop/listing?filter=${getSectionId}-${getCurrentOption}`, { replace: true });
     window.location.reload();
   };
-  
+
   function handleGetProductDetails(getCurrentProductId) {
     console.log(getCurrentProductId);
     dispatch(fetchProductDetails(getCurrentProductId));
   }
+
   const handleItemClick = (menuItem) => {
     if (menuItem.subMenu) return; // ✅ Ignore submenu items for direct navigation
     sessionStorage.removeItem("filters");
@@ -48,7 +46,6 @@ function MenuItems({ isColumn = false }) {
     window.location.reload(); // ✅ Navigate if there’s no submenu
   };
 
-  
   return (
     <nav
       className={`flex ${
@@ -76,9 +73,7 @@ function MenuItems({ isColumn = false }) {
                 {menuItem.subMenu.map((subItem) => (
                   <div
                     key={subItem.id}
-                    onClick={() => handleNavigateToListingPage(menuItem.label,subItem.id)}
-                   // console.log(menuItem.label, subItem.id);
-
+                    onClick={() => handleNavigateToListingPage(menuItem.label, subItem.id)}
                     className="hover:bg-[#b2996c] hover:text-white px-4 py-2 cursor-pointer transition-all duration-200"
                   >
                     {subItem.label}
@@ -93,8 +88,6 @@ function MenuItems({ isColumn = false }) {
   );
 }
 
-
-
 function HeaderRightContent() {
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
@@ -104,14 +97,12 @@ function HeaderRightContent() {
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    try {
-      await axios.post(`${API_BASE_URL}/api/auth/logout`, {}, { withCredentials: true });
-      localStorage.removeItem("token");
-      window.location.href = "/shop/home";
-    } catch (error) {
-      console.error("Logout failed:", error.response?.data?.message || error.message);
-    }
+  const result = await dispatch(logoutUser());
+  dispatch(setUser(null));
+  localStorage.removeItem("token");
+  window.location.href = "/shop/home";
   };
+  
 
   useEffect(() => {
     if (user) {
@@ -122,10 +113,8 @@ function HeaderRightContent() {
   return (
     <div className="flex items-center gap-5">
       <Link to="/shop/search" className="flex items-center ml-4">
-      <Search
-        className="h-6 w-6 text-black transition-transform duration-300 hover:scale-110 md:h-6"
-      />
-    </Link>
+        <Search className="h-6 w-6 text-black transition-transform duration-300 hover:scale-110 md:h-6" />
+      </Link>
       <Link to="/wishlist" className="relative">
         <Heart className="w-6 h-6 text-red-500" />
         {wishlist?.length > 0 && (
@@ -141,7 +130,6 @@ function HeaderRightContent() {
           size="icon"
           className="relative"
         >
-        
           <ShoppingCart className="w-6 h-6" />
           {cartItems?.items?.length > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
@@ -155,8 +143,6 @@ function HeaderRightContent() {
         />
       </Sheet>
 
-      
-
       {user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -167,14 +153,22 @@ function HeaderRightContent() {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="right" className="w-56 bg-[#F8F4F0]">
-            <DropdownMenuLabel className="text-[#b2996c]">Logged in as {user?.userName}</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-[#b2996c]">
+              Logged in as {user?.userName}
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => navigate("/shop/account")} className="hover:bg-[#b2996c] hover:text-white">
+            <DropdownMenuItem
+              onClick={() => navigate("/shop/account")}
+              className="hover:bg-[#b2996c] hover:text-white"
+            >
               <UserCog className="mr-2 h-4 w-4" />
               Account
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout} className="hover:bg-[#b2996c] hover:text-white">
+            <DropdownMenuItem
+              onClick={handleLogout}
+              className="hover:bg-[#b2996c] hover:text-white"
+            >
               <LogOut className="mr-2 h-4 w-4" />
               Logout
             </DropdownMenuItem>
@@ -208,8 +202,7 @@ function ShoppingHeader() {
     <>
       <header className="sticky top-0 z-50 w-full bg-white shadow-md">
         <div className="flex h-16 items-center justify-between px-4 md:px-8">
-
-      <Link to="/shop/home" className="flex items-center ml-4">
+          <Link to="/shop/home" className="flex items-center ml-4">
             <img
               src={logo}
               alt="Logo"
@@ -217,42 +210,39 @@ function ShoppingHeader() {
             />
           </Link>
 
-
           <div className="hidden lg:block">
-        <MenuItems />
-      </div>
+            <MenuItems />
+          </div>
 
-      <div className="flex">
+          <div className="flex">
             <HeaderRightContent />
 
-          {/* <button
-            onClick={handleSearchClick}
-            className="lg:hidden p-2 bg-[#b2996c] text-white rounded-full"
-          >
-            <Search className="h-5 w-5" />
-          </button> */}
+            {/* <button
+              onClick={handleSearchClick}
+              className="lg:hidden p-2 bg-[#b2996c] text-white rounded-full"
+            >
+              <Search className="h-5 w-5" />
+            </button> */}
 
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="lg:hidden hover:border-[#b2996c] ml-4 transition-all duration-200"
-              >
-                <Menu className="h-6 w-6 text-gray-600 hover:text-[#b2996c]" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-full max-w-xs bg-[#F8F4F0]">
-              <div className="flex flex-col gap-6 p-4">
-                <MenuItems isColumn />
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="lg:hidden hover:border-[#b2996c] ml-4 transition-all duration-200"
+                >
+                  <Menu className="h-6 w-6 text-gray-600 hover:text-[#b2996c]" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-full max-w-xs bg-[#F8F4F0]">
+                <div className="flex flex-col gap-6 p-4">
+                  <MenuItems isColumn />
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </header>
-
-     
     </>
   );
 }

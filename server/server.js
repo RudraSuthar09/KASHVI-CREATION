@@ -163,27 +163,27 @@ app.use("/api", contactRoutes);
 app.use("/api/admin", emailRoutes);
 
 // ✅ Logout Route
-app.post("/api/auth/logout", (req, res) => {
-  console.log("🔹 Logout request received...");
-  console.log("🔹 Cookies received:", req.cookies);
+// app.post("/api/auth/logout", (req, res) => {
+//   console.log("🔹 Logout request received...");
+//   console.log("🔹 Cookies received:", req.cookies);
 
-  const token = req.cookies?.token;
-  console.log("🔹 Token from cookies:", token);
+//   const token = req.cookies?.token;
+//   console.log("🔹 Token from cookies:", token);
 
-  if (!token) {
-    console.log("❌ No token found in cookies!");
-    return res.status(400).json({ success: false, message: "No token provided!" });
-  }
+//   if (!token) {
+//     console.log("❌ No token found in cookies!");
+//     return res.status(400).json({ success: false, message: "No token provided!" });
+//   }
 
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "None",
-  });
+//   res.clearCookie("token", {
+//     httpOnly: true,
+//     secure: process.env.NODE_ENV === "production",
+//     sameSite: "None",
+//   });
 
-  console.log("✅ Token cleared from cookies.");
-  res.json({ success: true, message: "Logged out successfully." });
-});
+//   console.log("✅ Token cleared from cookies.");
+//   res.json({ success: true, message: "Logged out successfully." });
+// });
 
 // ✅ Start Server
 app.listen(PORT, () => console.log(`🚀 Server is running on port ${PORT}`));

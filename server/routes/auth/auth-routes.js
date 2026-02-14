@@ -66,8 +66,8 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "None",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -234,7 +234,11 @@ router.post("/verify-reset-otp", async (req, res) => {
 
 // 📌 Logout Route
 router.post("/logout", (req, res) => {
-  res.clearCookie("token").json({ success: true, message: "Logged out successfully!" });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+  }).json({ success: true, message: "Logged out successfully!" });
 });
 
 // 📌 Check Auth Route
