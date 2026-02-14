@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
+import API_BASE_URL from "@/config/api";
 
 function ProductImageUpload({
   imageFile,
@@ -73,7 +74,7 @@ function ProductImageUpload({
     try {
       console.log("Uploading to backend:", [...formData.entries()]);
   
-      const response = await axios.post("http://localhost:5000/api/admin/products/upload-media", formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/admin/products/upload-media`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
   

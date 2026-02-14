@@ -6,6 +6,8 @@ import Footer from '../../../components/common/Footer';
 import Head from "../../../components/shopping-view/header";
 import WhatsAppButton from "@/components/common/WhatsAppButton";
 import Chatbot from "../../../components/chatbot/chatbot";
+import API_BASE_URL from "@/config/api";
+
 const ContactForm = ({ onClose }) => {
   const { toast } = useToast(); // ✅ Moved inside the component
 
@@ -28,7 +30,7 @@ const ContactForm = ({ onClose }) => {
     e.preventDefault();
     try {
       console.log(formData);
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

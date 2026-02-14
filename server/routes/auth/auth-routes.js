@@ -66,8 +66,8 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      secure: true,
+      sameSite: "None",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -101,7 +101,7 @@ router.post("/forgot-password", async (req, res) => {
       },
     });
 
-    const resetLink = `http://localhost:5173/auth/reset-password/${resetToken}`;
+    const resetLink = `${process.env.CLIENT_URL}/auth/reset-password/${resetToken}`;
 
     const mailOptions = {
       from: `"Kashvi Creations" <${process.env.EMAIL_USER}>`,
@@ -178,14 +178,14 @@ router.post("/reset-password", async (req, res) => {
 
   } catch (error) {
     console.error("❌ Error resetting password:", error);
-    
+
     if (error.name === 'JsonWebTokenError') {
       return res.status(400).json({ success: false, message: "Invalid or expired reset link." });
     }
     if (error.name === 'TokenExpiredError') {
       return res.status(400).json({ success: false, message: "Reset link has expired." });
     }
-    
+
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });

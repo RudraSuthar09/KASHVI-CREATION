@@ -3,7 +3,7 @@ import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import API_BASE_URL from "@/config/api";
 const InquiryPage = () => {
   const [inquiries, setInquiries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +12,7 @@ const InquiryPage = () => {
     const fetchInquiries = async () => {
       try {
         const token = localStorage.getItem("token"); // Admin token
-        const response = await axios.get("http://localhost:5000/api/contacts", {
+        const response = await axios.get(`${API_BASE_URL}/api/contacts`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

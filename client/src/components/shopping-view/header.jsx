@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { shoppingViewHeaderMenuItems } from "@/config";
+import API_BASE_URL from "@/config/api";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -104,7 +105,7 @@ function HeaderRightContent() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/logout", {}, { withCredentials: true });
+      await axios.post(`${API_BASE_URL}/api/auth/logout`, {}, { withCredentials: true });
       localStorage.removeItem("token");
       window.location.href = "/shop/home";
     } catch (error) {

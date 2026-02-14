@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import API_BASE_URL from "@/config/api";
 
 const OtpResetPassword = () => {
   const [phone, setPhone] = useState("");
@@ -11,7 +12,7 @@ const OtpResetPassword = () => {
   // 🔹 Send OTP
   const sendOtp = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/send-otp", { phone });
+      const response = await axios.post(`${API_BASE_URL}/api/auth/send-otp`, { phone });
       if (response.data.success) {
         setStep(2);
         setMessage("OTP sent successfully!");
@@ -26,11 +27,11 @@ const OtpResetPassword = () => {
   // 🔹 Verify OTP and Reset Password
   const resetPassword = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/verify-otp", { phone, enteredOtp: otp });
+      const response = await axios.post(`${API_BASE_URL}/api/auth/verify-otp`, { phone, enteredOtp: otp });
 
       if (response.data.success) {
         // Now, reset the password
-        await axios.post("http://localhost:5000/api/auth/reset-password-otp", { phone, newPassword });
+        await axios.post(`${API_BASE_URL}/api/auth/reset-password-otp`, { phone, newPassword });
         setMessage("✅ Password Reset Successful!");
       } else {
         setMessage("❌ Invalid OTP, try again.");

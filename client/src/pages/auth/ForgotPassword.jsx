@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "@/config/api";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -18,9 +19,9 @@ function ForgotPassword() {
       const data = method === "otp" ? { phone } : { email };
 
       if (method === "otp") {
-        endpoint = "/api/auth/send-reset-otp"; // Endpoint for OTP
+        endpoint = `${API_BASE_URL}/api/auth/send-reset-otp`; // Endpoint for OTP
       } else {
-        endpoint = "/api/auth/forgot-password"; // Endpoint for email-based reset
+        endpoint = `${API_BASE_URL}/api/auth/forgot-password`; // Endpoint for email-based reset
       }
 
       const response = await fetch(endpoint, {

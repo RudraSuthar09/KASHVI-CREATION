@@ -6,6 +6,7 @@ import jsPDF from "jspdf";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import API_BASE_URL from "@/config/api";
 const logo = "https://res.cloudinary.com/doytxxdrl/image/upload/v1739795142/logo_xk1opa.jpg"
 
 const InvoicePreview = () => {
@@ -39,7 +40,7 @@ const InvoicePreview = () => {
         if (!user?.email || !invoiceRef.current) return;
 
         try {
-            const response = await fetch("http://localhost:5000/api/send-invoice", {
+            const response = await fetch(`${API_BASE_URL}/api/send-invoice`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

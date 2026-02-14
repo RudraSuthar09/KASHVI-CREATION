@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ClipLoader } from 'react-spinners';
-
+import API_BASE_URL from "@/config/api";
 const EmailForm = () => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
@@ -15,7 +15,7 @@ const EmailForm = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/admin/send-email', {
+      const response = await axios.post(`${API_BASE_URL}/api/admin/send-email`, {
         subject,
         message,
       });
