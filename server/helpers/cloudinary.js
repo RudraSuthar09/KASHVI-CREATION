@@ -5,9 +5,9 @@ const streamifier = require("streamifier");
 
 // 🔒 Secure Cloudinary credentials
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "dpzxcxyqv",
-  api_key: process.env.CLOUDINARY_API_KEY || "379395625323433",
-  api_secret: process.env.CLOUDINARY_API_SECRET || "w-urcZ7KYnzH3DLsrC9VnTLdx6o",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "doj1lcswg",
+  api_key: process.env.CLOUDINARY_API_KEY || "296814797114791",
+  api_secret: process.env.CLOUDINARY_API_SECRET || "L_nQ-4f68gpsqDpJKF0Zv-4UwBY",
 });
 
 // ✅ Multer Setup (Memory Storage for Direct Uploads)
