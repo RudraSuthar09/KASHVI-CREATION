@@ -541,31 +541,30 @@ function ShoppingHome() {
 
 
       {/* Image */}
-      <div className="relative hidden md:mt-12  w-full h-full md:block ">
+      {/* Festive Edit card-style image */}
+      <div className="hidden md:flex justify-center mt-12">
+        <div className="relative w-full max-w-6xl h-[360px] overflow-hidden border border-black bg-white">
+          <img
+            src="https://res.cloudinary.com/doytxxdrl/image/upload/v1739486005/final_x0qmho.webp"
+            alt="Festive Edit"
+            className="w-full h-full object-cover"
+          />
 
-        <img
-          src="https://res.cloudinary.com/doytxxdrl/image/upload/v1739486005/final_x0qmho.webp"
-          alt="Festive Edit"
-          className="w-full h-full object-cover"
-        />
-
-        {/* Shop Now Button */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <button
-            onClick={() => {
-              // Scroll to the top of the page
-              window.scrollTo({ top: 0, behavior: "smooth" });
-
-              navigate("/shop/listing?Occasion=festive_sarees")
-            }}
-            className="bg-gradient-to-r from-[#b2966c] to-[#a2835d] text-white px-6 py-3 rounded-full shadow-lg text-lg font-semibold 
-                     hover:from-[#a2835d] hover:to-[#8f724a] transition-all duration-300 transform hover:scale-105"
-          >
-            Shop Now
-          </button>
+          {/* Shop Now Button */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <button
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                navigate("/shop/listing?Occasion=festive_sarees");
+              }}
+              className="bg-gradient-to-r from-[#b2966c] to-[#a2835d] text-white px-6 py-3 rounded-full shadow-lg text-lg font-semibold 
+                       hover:from-[#a2835d] hover:to-[#8f724a] transition-all duration-300 transform hover:scale-105"
+            >
+              Shop Now
+            </button>
+          </div>
         </div>
       </div>
-
 
 
 
