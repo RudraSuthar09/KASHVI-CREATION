@@ -254,10 +254,10 @@ function ShoppingHome() {
 
   return (
     <div className="flex flex-col min-h-screen">
-          <h1 className="text-center text-5xl font-bold text-[#0a373b] mt-6">
+          {/* <h1 className="text-center text-5xl font-bold text-[#0a373b] mt-6">
       Kashvi Creations
-    </h1>
-      <div className="relative w-full h-[500px] bg-[#f8f4f0] overflow-hidden">
+    </h1> */}
+      <div className="relative w-full h-[600px] bg-[#f8f4f0] overflow-hidden">
 
         {/* Image Slider  */}
         {featureImageList && featureImageList.length > 0 ? (

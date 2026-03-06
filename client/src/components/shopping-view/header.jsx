@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Input } from "../ui/input";
 import logo from "../../assets/logo.jpg";
+import { motion } from "framer-motion";
 
 function MenuItems({ isColumn = false }) {
   const navigate = useNavigate(); // ✅ Fix: Define navigate inside the component
@@ -48,9 +49,8 @@ function MenuItems({ isColumn = false }) {
 
   return (
     <nav
-      className={`flex ${
-        isColumn ? "flex-col gap-4" : "justify-center gap-6"
-      } py-4`}
+      className={`flex ${isColumn ? "flex-col gap-4" : "justify-center gap-6"
+        } py-4`}
     >
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <div key={menuItem.id} className="relative group">
@@ -97,12 +97,12 @@ function HeaderRightContent() {
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
-  const result = await dispatch(logoutUser());
-  dispatch(setUser(null));
-  localStorage.removeItem("token");
-  window.location.href = "/shop/home";
+    const result = await dispatch(logoutUser());
+    dispatch(setUser(null));
+    localStorage.removeItem("token");
+    window.location.href = "/shop/home";
   };
-  
+
 
   useEffect(() => {
     if (user) {
@@ -202,14 +202,27 @@ function ShoppingHeader() {
     <>
       <header className="sticky top-0 z-50 w-full bg-white shadow-md">
         <div className="flex h-16 items-center justify-between px-4 md:px-8">
-          <Link to="/shop/home" className="flex items-center ml-4">
-            <img
+          <Link to="/shop/home" className="flex items-center ml-4 gap-3">
+            {/* Logo */}
+            <motion.img
               src={logo}
               alt="Logo"
-              className="h-12 w-auto object-contain transition-transform duration-300 hover:scale-110 md:h-14"
+              className="h-12 w-auto object-contain md:h-14"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             />
-          </Link>
 
+            {/* Brand Name */}
+            <motion.h1
+              className="text-xl md:text-2xl font-extrabold tracking-wide text-[#0a373b]"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+            >
+              Kashvi Creations
+            </motion.h1>
+          </Link>
           <div className="hidden lg:block">
             <MenuItems />
           </div>
