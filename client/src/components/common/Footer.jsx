@@ -32,17 +32,16 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Phone size={18} className="flex-shrink-0" />
-                <span>+91 93784 21333</span>
+                <span>+91 9016009390</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={18} className="flex-shrink-0" />
-                <span>kashvicreation10@gmail.com</span>
+                <span>suhaniach25@gmail.com</span>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="flex-shrink-0" />
                 <span>
-                  Shop No.113, Millennium Textile Market - 2, Ring Road, Surat -
-                  395002
+                  D/8 Laxmikunj society, Bank of India road, Subhanpura road, Vadodara - 390023
                 </span>
               </div>
               <div className="flex items-start gap-3">
@@ -195,10 +194,9 @@ const Footer = () => {
       <div className="border-t border-[#6b3d2f]/20 pt-8 pb-6">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-2">Kashvi Creations</h2>
-          <p className="text-sm opacity-75">Crafting Elegance Since 1943</p>
+          <p className="text-sm opacity-75">Build and Developed by Rudra & Suhani</p>
           <p className="mt-8 text-sm opacity-75">
-            Shop No. 6115 To 6124,Millennium Textile Market - 4,Bhathena,
-            Surat-395002
+            This website is built and Developed by Rudra & Suhani. All rights reserved. Designed with love and passion for fashion.
           </p>
         </div>
       </div>

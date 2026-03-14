@@ -55,7 +55,7 @@ Facebook: https://facebook.com/kashvicreation
 Instagram: https://instagram.com/kashvicreation
 Pinterest: https://pinterest.com/kashvicreation
 Twitter: https://twitter.com/kashvicreation
-For inquiries, feel free to reach out via email at hello@kashvicreation.com or call us at +91 93784 21333.
+For inquiries, feel free to reach out via email at hello@kashvicreation.com or call us at +91 9016009390.
 
 Explore our curated collection on our website: https://www.kashvicreation.com. Here, you can shop for exclusive sarees, learn about the different types of fabrics, browse styling tips, and even book a personalized consultation to find your dream saree.
 
