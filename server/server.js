@@ -32,10 +32,7 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected successfully!"))
   .catch((error) => {
     console.error("❌ MongoDB Connection Error:", error.message);
@@ -43,16 +40,25 @@ mongoose
   });
 
 app.use(cookieParser());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://kashvi-creation-e4iv.vercel.app",
+  "https://kashvi-creation.vercel.app",
+  "https://kashvi-creation-lgpe.vercel.app",
+  "https://kashvicreations.me",
+  "https://www.kashvicreations.me"
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "https://kashvi-creation-e4iv.vercel.app",
-      "https://kashvi-creation.vercel.app",
-      "https://kashvi-creation-lgpe.vercel.app",
-      "https://www.kashvicreations.me"
-    ],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
@@ -64,6 +70,8 @@ app.use(
     ],
   })
 );
+
+app.options("*", cors());
 
 app.use(express.json());
 
