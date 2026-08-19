@@ -1,8 +1,10 @@
+const mongoose = require("mongoose");
 const Order = require("../../models/Order");
+const User = require("../../models/User");
 
 const getAllOrdersOfAllUsers = async (req, res) => {
   try {
-    const orders = await Order.find({});
+    const orders = await Order.find({}).lean();
 
     if (!orders.length) {
       return res.status(404).json({
@@ -11,9 +13,25 @@ const getAllOrdersOfAllUsers = async (req, res) => {
       });
     }
 
+    // Order.userId is stored as a plain string, so it can't be populated
+    // directly — look up the matching emails so the admin UI can search by
+    // customer email without a separate request per order.
+    const userIds = [
+      ...new Set(orders.map((order) => order.userId).filter((id) => mongoose.isValidObjectId(id))),
+    ];
+    const users = userIds.length
+      ? await User.find({ _id: { $in: userIds } }).select("email").lean()
+      : [];
+    const emailByUserId = new Map(users.map((user) => [String(user._id), user.email]));
+
+    const ordersWithCustomerEmail = orders.map((order) => ({
+      ...order,
+      customerEmail: emailByUserId.get(String(order.userId)) || null,
+    }));
+
     res.status(200).json({
       success: true,
-      data: orders,
+      data: ordersWithCustomerEmail,
     });
   } catch (e) {
     console.log(e);
