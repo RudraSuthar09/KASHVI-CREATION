@@ -55,6 +55,7 @@
     "react-to-print": "^3.0.5",
     "react-toastify": "^11.0.3",
     "reactstrap": "^9.2.3",
+    "recharts": "^3.10.1",
     "redux-persist": "^6.0.0",
     "styled-components": "^6.1.15",
     "swiper": "^11.2.4",
