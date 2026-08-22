@@ -5,6 +5,7 @@ import {
   ShoppingBasket,
   Mail,
   Send,
+  BarChart3,
 } from "lucide-react";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +17,12 @@ const adminSidebarMenuItems = [
     label: "Dashboard",
     path: "/admin/dashboard",
     icon: <LayoutDashboard />,
+  },
+  {
+    id: "analytics",
+    label: "Analytics",
+    path: "/admin/analytics",
+    icon: <BarChart3 />,
   },
   {
     id: "products",
